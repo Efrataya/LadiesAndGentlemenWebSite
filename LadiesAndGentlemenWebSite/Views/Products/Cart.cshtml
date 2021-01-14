@@ -7,28 +7,29 @@
 <container class="tablecart">
 
     <h1>shopping cart</h1>
+
     <table class="table table-bordered">
 
-
-        <thead>
-            <tr>
-                <form>
-                    <th scope="col">for removal</th>
-                </form>
+        @foreach (var item in Model)
+        {
+            <thead>
+                <tr>
+                    <th scope="col">
+                        for removal
+                    </th>    
                     <th scope="col">Image</th>
                     <th scope="col">Itam</th>
                     <th scope="col">Price</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+
+                </tr>
+            </thead>
+            <tbody>
+
                 <tr>
                     <th scope="row">
-                        <form asp-controller="Products" asp-action="Index">
+                        <form asp-controller="Products" asp-action="RemoveFromCart">
                             <input type="hidden" value="@Html.DisplayFor(modelItem => item.Id)" name="Id" id="Id" />
-                            <button type="button" class="btn btn-light">
+                            <button type="submit" class="btn btn-light">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16"
                                      class="bi bi-bag-x" fill="black" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
@@ -45,9 +46,12 @@
                     <td></td>
 
                 </tr>
-            }
-        </tbody>
+
+            </tbody>
+        }
     </table>
+
+
     <tr>
         @if (Context.Session.GetString("sum") != null)
         {
@@ -63,9 +67,8 @@
 
     }
     <br />
-    <form asp-controller="Orders" asp-action="Create">
-     <button type="submit" class="btn btn-secondary">Make Order</button>
-    </form>
+    <a asp-controller="Orders" asp-action="Create" class="btn btn-secondary">Make Order</a>
+
 
 
 
@@ -82,6 +85,6 @@
 
 
 
-    @section Css{
-        <link rel="stylesheet" herf="~/css/cart" />
-    }
+@section Css{
+    <link rel="stylesheet" herf="~/css/cart" />
+}

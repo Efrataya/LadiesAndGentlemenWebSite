@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<LadiesAndGentlemenWebSite.Models.Product>
-
+@using Microsoft.AspNetCore.Http;
 @{
     ViewData["Title"] = "Index";
 }
@@ -120,6 +120,23 @@
                         <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             for purchase
                         </button>
+                        @if (Context.Session.GetString("FirstName") != null)
+                        {
+                            @if (Context.Session.GetString("FirstName") == "L&G1234")
+                            {
+                                <a asp-action="Edit" asp-route-id="(@Html.DisplayFor(modelItem => item.Id)" asp-controller="Products">
+
+                                    <button type="submit" class="btn btn-dark">Edit</button>
+
+                                </a>
+                                <a asp-action="Delete" asp-route-id="(@Html.DisplayFor(modelItem => item.Id)" asp-controller="Products">
+
+                                    <button type="submit" class="btn btn-dark">Delete</button>
+
+                                </a>
+
+                            }
+                        }
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
                             <div class="modal-dialog">
@@ -164,8 +181,8 @@
 </div>
 
 <script>
-        /* Execute the magnify function: */
-        magnify("myimage", 3);
+    /* Execute the magnify function: */
+    magnify("myimage", 3);
             /* Specify the id of the image, and the strength of the magnifier glass: */
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>

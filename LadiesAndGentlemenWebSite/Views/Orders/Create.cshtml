@@ -1,19 +1,27 @@
-﻿
+﻿@model LadiesAndGentlemenWebSite.Models.Order
+
+<div class="card text-center">
+    <div class="card-header">
+        <figure class="text-end  class=" thank"">
+            <blockquote class="blockquote">
+                <p>“Life is a matter of choices, and every choice you make makes you.” </p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+                John C. Maxwell
+            </figcaption>
+        </figure>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Thanks for making the best choice!</h5>
+        <p class="card-text">The choice which will make you a part of Ladies&Gentlemen well known style!</p>
+        <form asp-controller="Orders" asp-action="Create" >
+            <button type="submit" class="btn btn-dark">view order details</button>
+        </form>
+    </div>
+   
+</div>
 
 
-<br />
-<br />
-<h2 class="thank">Thanks for choosing <br />Ladies&Gentlemen!</h2>
-<h4 class="thank">Keep being part of the best saled quality! </h4>
-<br />
-<br />
-
-<form asp-controller="Orders" asp-action="Create">
-    <button type="submit" class="btn btn-secondary">view order details</button>
-</form>
-<br />
-<br />
-<br />
 <img src="https://d3m9l0v76dty0.cloudfront.net/system/photos/227188/show/f22c3e3cb9f60fec37c274fa25abdb66.jpg">
 
 
@@ -31,10 +39,7 @@
 
 
 @section Css{
-    <link rel="stylesheet" herf="~/css/cart" />
+    <link rel="stylesheet" herf="~/css/preOrder" />
 }
 
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

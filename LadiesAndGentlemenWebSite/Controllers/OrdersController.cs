@@ -25,7 +25,10 @@ namespace LadiesAndGentlemenWebSite.Controllers
         {
             return View(await _context.Order.ToListAsync());
         }
-
+        //public async Task<IActionResult> MyOrder()
+        //{
+        //    return View();
+        //}
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -34,7 +37,7 @@ namespace LadiesAndGentlemenWebSite.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Order
+            var order = await _context.Order.Include(x => x.Carts).ThenInclude(x => x.Product)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
             {
@@ -81,6 +84,7 @@ namespace LadiesAndGentlemenWebSite.Controllers
             //return View(order);
             if (ModelState.IsValid)
             {
+                Order myOrder = new Order();
                 _context.Add(order);
                 await _context.SaveChangesAsync();
                 string productId = HttpContext.Session.GetString("cart");
@@ -94,8 +98,8 @@ namespace LadiesAndGentlemenWebSite.Controllers
                     _context.Add(c);
                     await _context.SaveChangesAsync();
                 }
-                HttpContext.Session.SetString("Cart", null);
-                return RedirectToAction(nameof(myOrder));
+                HttpContext.Session.SetString("Cart", "");
+                return RedirectToAction(nameof(Index));
             }
             return View(order);
         }

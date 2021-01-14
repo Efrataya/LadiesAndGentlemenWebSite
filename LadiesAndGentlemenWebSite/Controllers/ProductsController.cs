@@ -78,21 +78,8 @@ namespace LadiesAndGentlemenWebSite.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetString("cart") == null)
-            {
-                return View(await _context.Product.ToListAsync());
-            }
-            else
-            {
-                string productId = HttpContext.Session.GetString("cart");
-                string[] ids = productId.Split(',');
-                int[] myInts = ids.Select(int.Parse).ToArray();
-                var purchased = from p in _context.Product
-                                where myInts.Any(s => s == p.Id)
-                                select p;
-                var leftItems = _context.Product.Except(purchased);
-                return View(await leftItems.ToListAsync());
-            }
+            
+            return View(await _context.Product.ToListAsync());
 
         }
 
@@ -117,17 +104,17 @@ namespace LadiesAndGentlemenWebSite.Controllers
             }
             else
             {
-                string sum = HttpContext.Session.GetString("sum");
-                int x = Int32.Parse(sum);
-                x++;
-                string updateSum = x.ToString();
-                HttpContext.Session.SetString("sum", updateSum);
                 string productId = HttpContext.Session.GetString("cart");
                 productId += ",";
                 productId += Id;
                 HttpContext.Session.SetString("cart", productId);
                 string[] ids = productId.Split(',');
                 int[] myInts = ids.Select(int.Parse).ToArray();
+                string sum = HttpContext.Session.GetString("sum");
+                int x = Int32.Parse(sum);
+                x= myInts.Count();
+                string updateSum = x.ToString();
+                HttpContext.Session.SetString("sum", updateSum);
                 var c = from p in _context.Product
                         where myInts.Contains(p.Id)
                         select p;
@@ -140,6 +127,50 @@ namespace LadiesAndGentlemenWebSite.Controllers
                 return View(await c.ToListAsync());
             }
 
+        }
+        // GET: cart
+        public async Task<IActionResult> RemoveFromCart(int Id)
+        {
+            string myString = HttpContext.Session.GetString("cart");
+            string[] ids = myString.Split(',');
+            int[] myInts = new int[100];
+            myInts= ids.Select(int.Parse).ToArray();
+
+            if (myInts.Count()==1)
+            {
+                HttpContext.Session.SetString("cart", "");
+                HttpContext.Session.SetString("price", "0");
+                HttpContext.Session.SetString("sum", "0");
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                string MyString = HttpContext.Session.GetString("cart");
+                string[] Ids = myString.Split(',');
+                int[] MyInts = Ids.Select(int.Parse).ToArray();
+                MyInts = MyInts.Where(val => val != Id).ToArray();
+                string updated = MyInts.ToString();
+                HttpContext.Session.SetString("cart", updated);
+                string sum = HttpContext.Session.GetString("sum");
+                int x = Int32.Parse(sum);
+                x = MyInts.Count();
+                string updateSum = x.ToString();
+                HttpContext.Session.SetString("sum", updateSum);
+                string productId = HttpContext.Session.GetString("cart");
+                HttpContext.Session.SetString("cart", productId);
+                string[] idsList = productId.Split(',');
+                int[] myIntsList = ids.Select(int.Parse).ToArray();
+                var c = from p in _context.Product
+                        where myIntsList.Contains(p.Id)
+                        select p;
+                float finalPrice = 0;
+                foreach (var Product in c)
+                    finalPrice += Product.price;
+                string price = finalPrice.ToString();
+                HttpContext.Session.SetString("price", price);
+                return View(await c.ToListAsync());
+            }
+           
         }
 
 
