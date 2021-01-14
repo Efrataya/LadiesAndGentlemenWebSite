@@ -1,0 +1,117 @@
+.logo{
+    position:absolute;
+    top:120px;
+    right:  550px;
+    width:20%;
+    direction: ltr;
+    margin-top: 2; 
+   
+}
+.nav-link{
+    color: white ;
+    font-size: 20;
+}
+.navbar{
+    color: white
+
+}.bi{
+    color:white;
+}
+
+.row{
+margin-left: 50px;
+
+}
+
+.page-footer
+{
+    bottom: 0px !important;
+    color: white;
+    background-color:rgb(32, 32, 32) !important;
+    margin-bottom: 0px !important;
+    
+}
+
+
+.title1{
+    position: absolute;
+    top:330px;
+    right:  0;
+    left: 750;
+    width: 20%;
+    height: 40%;
+    direction: rtl;
+    font-family: Impact, Charcoal, sans-serif;  
+    font-size: 40px;
+}
+
+.title2{
+    position: absolute;
+    top:600px;
+    right:  0;
+    left: 725;
+    width: 20%;
+    height: 40%;
+    direction: rtl;
+    font-family: Impact, Charcoal, sans-serif;  
+    font-size: 40px;
+}
+
+
+.logofooter{
+    position: absolute;
+    top:45px;
+    right:  590px;
+    width: 30%;
+    direction: rtl;    
+}
+.grey-text 
+{
+    color: white !important;
+}
+
+.mapfooter{
+    position: absolute;
+    top:30px;
+    right:  1px;
+    width: 40%;
+    direction: rtl;    
+}
+.container{
+    margin-bottom: 0px !important;
+}
+
+div{
+    display:block;
+}
+
+.form-group
+{
+    margin-top:260px;
+    width:500;
+    margin-left:  40%;
+}
+.form-check-input
+{
+    margin-top:260px;
+    width:1200;
+    margin-left:  40%;
+}
+.form-check-label
+{
+    margin-top:200px;
+    margin-top:10px;
+    width:500;
+    margin-left:  40%;
+}
+/* .btn 
+{
+    margin-left:  40% ;
+} */
+
+.form-row
+{
+    margin-top:200px;
+    width:500 ; 
+    margin-left:  40%;
+}

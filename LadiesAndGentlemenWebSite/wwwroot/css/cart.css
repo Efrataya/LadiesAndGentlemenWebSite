@@ -1,0 +1,48 @@
+.thank{
+    text-align:center !important
+}
+
+
+
+.form-group {
+    margin-left: 50px !important;
+    margin-right: 50px !important;
+}
+
+.bi {
+    color: white;
+}
+
+
+
+
+.table {
+    margin-left: 50px !important;
+    margin-right: 50px !important;
+    width: 50%;
+}
+
+h1 {
+    margin-left: 50px !important;
+    /* margin-right: 500px !important; */
+}
+
+h5 {
+    margin-left: 50px !important;
+}
+
+p {
+    margin-left: 50px;
+}
+
+.btn {
+    margin-left: 50px;
+}
+
+.date {
+    margin-left: 50px !important;
+}
+
+.customer-dob {
+    margin-left: 350px !important;
+}

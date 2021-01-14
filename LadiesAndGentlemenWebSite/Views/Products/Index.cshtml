@@ -1,0 +1,189 @@
+﻿@model IEnumerable<LadiesAndGentlemenWebSite.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<head>
+    @*<meta name="viewport" content="width=device-width, initial-scale=1.0">*@
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        div {
+            margin-top: 2px;
+        }
+
+        .card {
+            margin-top: 60px;
+            margin-bottom: 20px;
+        }
+
+        .img-magnifier-container {
+            position: relative;
+        }
+
+        .img-magnifier-glass {
+            position: absolute;
+            border: 3px solid #000;
+            border-radius: 50%;
+            cursor: none;
+            /*Set the size of the magnifier glass:*/
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+    <script>
+        function magnify(imgID, zoom) {
+            var img, glass, w, h, bw;
+            img = document.getElementById(imgID);
+
+            /* Create magnifier glass: */
+            glass = document.createElement("DIV");
+            glass.setAttribute("class", "img-magnifier-glass");
+
+            /* Insert magnifier glass: */
+            img.parentElement.insertBefore(glass, img);
+
+            /* Set background properties for the magnifier glass: */
+            glass.style.backgroundImage = "url('" + img.src + "')";
+            glass.style.backgroundRepeat = "no-repeat";
+            glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
+            bw = 3;
+            w = glass.offsetWidth / 2;
+            h = glass.offsetHeight / 2;
+
+            /* Execute a function when someone moves the magnifier glass over the image: */
+            glass.addEventListener("mousemove", moveMagnifier);
+            img.addEventListener("mousemove", moveMagnifier);
+
+            /*and also for touch screens:*/
+            glass.addEventListener("touchmove", moveMagnifier);
+            img.addEventListener("touchmove", moveMagnifier);
+            function moveMagnifier(e) {
+                var pos, x, y;
+                /* Prevent any other actions that may occur when moving over the image */
+                e.preventDefault();
+                /* Get the cursor's x and y positions: */
+                pos = getCursorPos(e);
+                x = pos.x;
+                y = pos.y;
+                /* Prevent the magnifier glass from being positioned outside the image: */
+                if (x > img.width - (w / zoom)) { x = img.width - (w / zoom); }
+                if (x < w / zoom) { x = w / zoom; }
+                if (y > img.height - (h / zoom)) { y = img.height - (h / zoom); }
+                if (y < h / zoom) { y = h / zoom; }
+                /* Set the position of the magnifier glass: */
+                glass.style.left = (x - w) + "px";
+                glass.style.top = (y - h) + "px";
+                /* Display what the magnifier glass "sees": */
+                glass.style.backgroundPosition = "-" + ((x * zoom) - w + bw) + "px -" + ((y * zoom) - h + bw) + "px";
+            }
+
+            function getCursorPos(e) {
+                var a, x = 0, y = 0;
+                e = e || window.event;
+                /* Get the x and y positions of the image: */
+                a = img.getBoundingClientRect();
+                /* Calculate the cursor's x and y coordinates, relative to the image: */
+                x = e.pageX - a.left;
+                y = e.pageY - a.top;
+                /* Consider any page scrolling: */
+                x = x - window.pageXOffset;
+                y = y - window.pageYOffset;
+                return { x: x, y: y };
+            }
+        }
+    </script>
+</head>
+
+
+
+
+<div class="container">
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6">
+
+                <div class="card" style="width: 14rem; ">
+                    <img src="@Html.DisplayFor(modelItem => item.Image)" class="card-img-top">
+
+                    <div class="card-body">
+                        <h8 class="card-text">@Html.DisplayFor(modelItem => item.Description)</h8>
+
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.price)$</p>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            for purchase
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+
+                                        <div class="stamped-added only-tablet-desktop">
+
+                                            <h1>@Html.DisplayFor(modelItem => item.Description)</h1>
+                                        </div>
+                                        <div class="img-magnifier-container">
+                                            <img id="myimage" src="@Html.DisplayFor(modelItem => item.Image)" width="300" height="400">
+                                        </div>
+                                        <div class="price-box">
+                                            <span class="regular-price" id="product-price-86474">
+                                                <span class="price">@Html.DisplayFor(modelItem => item.price)$</span>
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                    <form asp-controller="Products" asp-action="Cart">
+                                        <input type="hidden" value="@Html.DisplayFor(modelItem => item.Id)" name="Id" id="Id" />
+
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-dark">add to my cart</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        }
+    </div>
+
+</div>
+
+<script>
+        /* Execute the magnify function: */
+        magnify("myimage", 3);
+            /* Specify the id of the image, and the strength of the magnifier glass: */
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+
+
+@*<img src="photo\per.jpg" width="250px" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Pink fur shoe</h5>
+                <p class="card-text">120$</p>
+                <a href="#" class="btn btn-primary">For purchase</a>
+            </div>
+        </div>
+    </div>*@
+
+
+
+
+@section Css{
+    <link rel="stylesheet" herf="~/css/product" />
+}

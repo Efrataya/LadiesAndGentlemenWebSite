@@ -1,0 +1,83 @@
+﻿@model IEnumerable<LadiesAndGentlemenWebSite.Models.Product>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    .card {
+        margin-top: 60px;
+        margin-bottom: 20px;
+    }
+</style>
+
+@*<p>
+        <a asp-action="Create">Create New</a>
+    </p>*@
+
+@*<form asp-action="Search">
+        <input placeholder="Enter Name" name="Name" autocomplete="off" />
+        <input placeholder="Enter maximum price" name="Pricee" autocomplete="off" />
+        <input type="submit" value="Filter" />
+    </form>*@
+
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card" style="width: 14rem;">
+                    <img src="@Html.DisplayFor(modelItem => item.Image)" class="card-img-top">
+
+                    <div class="card-body">
+                        <h8 class="card-text">@Html.DisplayFor(modelItem => item.Description)</h8>
+
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.price)$</p>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            for purchase
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+
+                                        <div class="stamped-added only-tablet-desktop">
+
+                                            <h1>@Html.DisplayFor(modelItem => item.Description)</h1>
+                                        </div>
+                                        <img class="imagesize" src="@Html.DisplayFor(modelItem => item.Image)" />
+                                        <div class="price-box">
+                                            <span class="regular-price" id="product-price-86474">
+                                                <span class="price">@Html.DisplayFor(modelItem => item.price)$</span>
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                    <form asp-controller="Products" asp-action="Cart">
+                                        <input type="hidden" value="@Html.DisplayFor(modelItem => item.Id)" name="Id" id="Id" />
+
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-dark">add to my cart</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        }
+    </div>
+</div>
+
+@section Css{
+    <link rel="stylesheet" herf="~/css/product" />
+}

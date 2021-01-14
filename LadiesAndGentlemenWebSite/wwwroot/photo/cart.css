@@ -1,0 +1,22 @@
+.form-group{
+    margin-left: 50px !important;
+    margin-right: 500px !important;
+ }
+ 
+ .form-row{
+     margin-left: 50px !important;
+     margin-right: 500px !important;
+  }
+  .car{
+     margin-left: 50px !important;
+     margin-right: 600px !important;
+  }
+  .tablecart{
+     margin-left: 50px !important;
+     margin-right: 50px !important;
+     text-align: left;
+  }
+  .pic{
+     transition-property: inherit;
+     position:inherit;
+  }

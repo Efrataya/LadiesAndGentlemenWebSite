@@ -1,0 +1,117 @@
+
+
+.abc{
+    position: absolute;
+    margin-top:300px;
+    right:  0;
+    left: 520;
+    width: 40%;
+    height: 40%;
+    direction: rtl;
+     
+    font-size: 20px;
+}.bi{
+    color:white;
+}
+
+.tit{
+    position: absolute;
+    margin-top:250px;
+    right:  0;
+    left: 620;
+    width: 40%;
+    height: 40%;
+    direction: rtl;
+     
+    font-size: 40px;
+}
+
+
+.logo{
+    position:absolute;
+    top:60px;
+    right:  650px;
+    width:20%;
+    direction: ltr;
+    margin-top: 2; 
+   
+}
+
+
+
+
+
+.nav-link{
+    color: white ;
+    font-size: 20;
+}
+.navbar{
+    color: white
+
+}
+
+.row{
+margin-left: 50px;
+
+}
+
+.page-footer
+{
+    bottom: 0px !important;
+    color: white;
+    background-color:rgb(32, 32, 32) !important;
+    margin-bottom: 0px !important;
+    margin-top: 70%;
+  
+}
+
+
+.logofooter{
+    position: absolute;
+    top:45px;
+    right:  590px;
+    width: 30%;
+    direction: rtl;    
+}
+.grey-text 
+{
+    color: white !important;
+}
+
+.mapfooter{
+    position: absolute;
+    top:30px;
+    right:  1px;
+    width: 40%;
+    direction: rtl;    
+}
+.container{
+    margin-bottom: 0px !important;
+}
+
+div{
+    display:block;
+}
+.data
+{
+    position: absolute;
+    margin-top:300px !important;
+    margin-left: 30%;
+}
+
+.tit{
+    position: absolute;
+    margin-top:200px;
+    right:  0;
+    left: 620;
+    width: 40%;
+    height: 40%;
+    direction: rtl;
+     
+    font-size: 40px;
+}
+ 
+
+ 
+
+ 
