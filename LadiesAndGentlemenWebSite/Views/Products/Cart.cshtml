@@ -44,9 +44,9 @@
                     <td><img src="@Html.DisplayFor(modelItem => item.Image)" height="80"></td>
                     <td>@Html.DisplayFor(modelItem => item.Description)</td>
                     <td>@Html.DisplayFor(modelItem => item.price)$</td>
-                    <td> @ViewBag.quantity[item.Id]</td>
+                    <td> @ViewBag.quantity[item.Id.ToString()]</td>
                     <td class="price">
-                        @(item.price * ViewBag.quantity[item.Id])$
+                        @(item.price * ViewBag.quantity[item.Id.ToString()])$
                     </td>
                 </tr>
 
@@ -72,10 +72,12 @@
     <h5>
         Total: <span id="total"></span>$
     </h5>
-    
-    <br />
-    <a asp-controller="Orders" asp-action="Create" class="btn btn-secondary">Make Order</a>
 
+    <br />
+    @if (Context.Session.GetString("sum") != "0")
+    {
+    <a asp-controller="Orders" asp-action="Create" class="btn btn-secondary">Make Order</a>
+    }
 
 
 
