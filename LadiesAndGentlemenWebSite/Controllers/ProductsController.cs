@@ -148,7 +148,7 @@ namespace LadiesAndGentlemenWebSite.Controllers
                 //int[] myInts = Array.ConvertAll(productIds, s => int.Parse(s));
 
                 productIds = productIds.Where(val => val != Id.ToString()).ToArray();
-                string updated = productIds.ToString();
+                string updated = String.Concat(productIds);
                 HttpContext.Session.SetString("cart", updated);
                 string sum = HttpContext.Session.GetString("sum");
                 int x = Int32.Parse(sum);
@@ -177,6 +177,7 @@ namespace LadiesAndGentlemenWebSite.Controllers
                 HttpContext.Session.SetString("sum", "0");
                 return RedirectToAction("Index", "Home");
             }
+            
         }
 
         public async Task<IActionResult> Search()

@@ -115,11 +115,12 @@
                         <h8 class="card-text">@Html.DisplayFor(modelItem => item.Description)</h8>
 
                         <p class="card-text">@Html.DisplayFor(modelItem => item.price)$</p>
-                        <!-- Button trigger modal -->                    
+                        <!-- Button trigger modal --> 
+                        <a asp-action="Details" asp-route-id="@item.Id">
                             <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            for purchase
+                                for purchase
                             </button>
-                          
+                        </a>
                             @if (Context.Session.GetString("FirstName") != null)
                             {
                                 @if (Context.Session.GetString("FirstName") == "L&G1234")
@@ -137,36 +138,7 @@
 
                                 }
                             }
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false" >
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-
-                                            <div class="stamped-added only-tablet-desktop">
-
-                                                <h1>@Html.DisplayFor(modelItem => item.Description)</h1>
-                                            </div>
-                                            <div class="img-magnifier-container">
-                                                <img id="myimage" src="@Html.DisplayFor(modelItem => item.Image)" width="300" height="400">
-                                            </div>
-                                            <div class="price-box">
-                                                <span class="regular-price" id="product-price-86474">
-                                                    <span class="price">@Html.DisplayFor(modelItem => item.price)$</span>
-                                                </span>
-                                            </div>
-
-                                        </div>
-                                        <form asp-controller="Products" asp-action="AddToCart">
-                                            <input type="hidden" value="@Html.DisplayFor(modelItem => item.Id)" name="Id" id="Id" />
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-dark">add to my cart</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                     
 
 
                     </div>

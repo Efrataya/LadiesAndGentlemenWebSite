@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model IEnumerable<IGrouping<int,LadiesAndGentlemenWebSite.Models.Category>>
+
+<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+    @foreach (var group in Model)
+    {
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" asp-controller="Products" asp-action="Details1" asp-route-id="2" id="navbarDropdown" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @Html.DisplayFor(modelItem => group.First().SubCategory.Name)
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                @foreach (var subCategory in group.ToList())
+                {
+                    <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="1" asp-route-id2="1">@Html.DisplayFor(modelItem => subCategory.Name)</a>
+                }
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="1">All</a>
+            </div>
+        </li>
+    }
+
+    @if (Context.Session.GetString("FirstName") != null)
+    {
+        @if (@Context.Session.GetString("FirstName") == "L&G1234")
+        {
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href=login.html id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Manager
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                    <a class="dropdown-item" asp-action="Create" asp-controller="Products">Add Item</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" asp-action="Delete" asp-controller="Products">Delete Item</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" asp-action="Edit" asp-controller="Products">Update Item</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" asp-action="Create" asp-controller="Clients">Add User</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" asp-action="Delete" asp-controller="Clients">Delete User</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" asp-action="Edit" asp-controller="Clients">Update User</a>
+                </div>
+            </li>
+        }
+    }
+
+</ul>
+
+

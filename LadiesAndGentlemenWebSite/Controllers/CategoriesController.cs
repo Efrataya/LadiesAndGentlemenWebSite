@@ -28,6 +28,13 @@ namespace LadiesAndGentlemenWebSite.Controllers
             var ladiesAndGentlemenContext = _context.Category.Include(c => c.SubCategory);
             return View(await ladiesAndGentlemenContext.ToListAsync());
         }
+        public async Task<IActionResult> CategoriesMenu()
+        {
+            var ladiesAndGentlemenContext = _context.Category.Include(c => c.SubCategory);
+            var data = await ladiesAndGentlemenContext.ToListAsync();
+            var grouped = data.GroupBy(cat => cat.SubCategoryId);
+            return PartialView(grouped);
+        }
 
         // GET: Categories/Details/5
         public async Task<IActionResult> Details(int? id, int? id2)

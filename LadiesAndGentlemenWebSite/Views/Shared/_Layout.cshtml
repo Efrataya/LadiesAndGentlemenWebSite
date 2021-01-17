@@ -14,6 +14,16 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/home.css" />
     @RenderSection("Css", required: false)
+    <script>
+                    window.onload = function () {
+
+                        fetch('@Url.Action("CategoriesMenu","Categories")').then(res => res.text())
+                            .then(text => {
+                                document.getElementById('categoriesMenu').innerHTML = text;
+                        });
+                    }
+    </script>
+
 </head>
 
 
@@ -27,164 +37,155 @@
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index">Ladies & Gentlemen</a>
+                <span id="categoriesMenu"></span>
+                <div style="display: flex; position: absolute; right: 20px;">
 
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item dropdown">
+                    @*<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item dropdown">
 
-                        <a class="nav-link dropdown-toggle" asp-controller="Products" asp-action="Details1" asp-route-id="2" id="navbarDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Women
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="1" asp-route-id2="1">Shirts</a>
-                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="1" asp-route-id2="2">Skirts</a>
-                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="1" asp-route-id2="3">Dresses</a>
-                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="1" asp-route-id2="4">Shoes</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="1">All</a>
-                        </div>
-                    </li>
+                    <a class="nav-link dropdown-toggle" asp-controller="Products" asp-action="Details1" asp-route-id="2" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Women
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="2" asp-route-id2="3">Shirts</a>
+                        <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="2" asp-route-id2="4">Skirts</a>
+                        <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="2" asp-route-id2="5">Dresses</a>
+                        <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="2" asp-route-id2="6">Shoes</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="2">All</a>
+                    </div>
+                </li>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" asp-controller="Products" asp-action="Details1" asp-route-id="1" id="navbarDropdown2" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Men
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="2" asp-route-id2="5">Suits</a>
-                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="2" asp-route-id2="6">Shirts</a>
-                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="2" asp-route-id2="7">Shoes</a>
-                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="2" asp-route-id2="8">Accessories</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="2">All</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" asp-controller="Products" asp-action="Details1" asp-route-id="3" id="navbarDropdown3" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Children
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" asp-controller="Products" asp-action="Details1" asp-route-id="1" id="navbarDropdown2" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Men
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="1" asp-route-id2="15">Suits</a>
+                        <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="1" asp-route-id2="16">Shirts</a>
+                        <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="1" asp-route-id2="17">Shoes</a>
+                        <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="1" asp-route-id2="18">Accessories</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="1">All</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" asp-controller="Products" asp-action="Details1" asp-route-id="3" id="navbarDropdown3" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Children
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="3" asp-route-id2="10">Suits</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="3" asp-route-id2="11">Accessories</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="3">All</a>
-                        </div>
-                    </li>
+                        <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="3" asp-route-id2="11">girl dress</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="3" asp-route-id2="12">shirts</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="3" asp-route-id2="13">suits</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="3" asp-route-id2="14">accessories</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="3">All</a>
+                    </div>
+                </li>
 
-                    @if (Context.Session.GetString("FirstName") != null)
-                    {
-                        @if (@Context.Session.GetString("FirstName") == "L&G1234")
-                        {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href=login.html id="navbarDropdown" role="button" data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    Manager
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                                    <a class="dropdown-item" asp-action="Create" asp-controller="Products">Add Item</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" asp-action="Delete" asp-controller="Products">Delete Item</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" asp-action="Edit" asp-controller="Products">Update Item</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" asp-action="Create" asp-controller="Clients">Add User</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" asp-action="Delete" asp-controller="Clients">Delete User</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" asp-action="Edit" asp-controller="Clients">Update User</a>
-                                </div>
-                            </li>
-                        }
-                    }
-
-
-                </ul>
-              
-
-
-                <form class="form-inline my-2 my-lg-0">
-                    @if (@Context.Session.GetString("cart") != null)
-                    {
-
-                        @if (Context.Session.GetString("sum") != null)
-                        {
-                            <span class="mine bi">
-                                @Context.Session.GetString("sum")
-                            </span>
-                        }
-
-                        <a asp-action="Cart" asp-controller="Products">
-
-                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-cart" fill="currentColor"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                            </svg>
-                        </a>}
-
-                    &nbsp; &nbsp;
-                    @if (@Context.Session.GetString("FirstName") == null)
-                    {
-                        <a asp-action="LogIn" asp-controller="Clients">
-                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-person-circle"
-                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
-                                <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
-                            </svg>
-                        </a>
-                    }
-                    &nbsp; &nbsp;
-                    @if (@Context.Session.GetString("FirstName") != null)
-                    {
-                        <a asp-action="logout" asp-controller="Clients">
-                          
-                            <i class="bi bi-person-x-fill"></i>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor" class="bi bi-person-x-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z" />
-                            </svg>
-                            &nbsp; &nbsp;
-                        </a>
-                        <a asp-action="Edit" asp-controller="Clients" asp-route-id="@Context.Session.GetString("clientId")">
-                            <i class="bi bi-file-earmark-person"></i>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
-                                <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5v2z" />
-                            </svg>
-                            &nbsp; &nbsp;
-                        </a>
-
-                    }
-
-
-                </form>
-                <form asp-action="Search" asp-controller="Products">
-                    <input placeholder="Enter Name Product" name="Name" autocomplete="off" />
-                    <input placeholder="Enter Maximum Price" name="Pricee" autocomplete="off" />
-                    <input type="submit" value="Search" />
-                </form>
-            </div>
-
-        </nav>
-        @*@if (Context.Session.GetString("FirstName") != null)
-            {
-                @if (@Context.Session.GetString("FirstName") == "L&G1234")
+                @if (Context.Session.GetString("FirstName") != null)
                 {
-                    <p4 class="hello">
-                        Hello, manager!
-                    </p4>
+                    @if (@Context.Session.GetString("FirstName") == "L&G1234")
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href=login.html id="navbarDropdown" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                Manager
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                <a class="dropdown-item" asp-action="Create" asp-controller="Products">Add Item</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-action="Index" asp-controller="Products">Delete Item</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-action="Index" asp-controller="Products">Update Item</a>
+                                <div class="dropdown-divider"></div>
+
+                                <a class="dropdown-item" asp-action="Index" asp-controller="Clients">Delete User</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-action="Index" asp-controller="Clients">Update User</a>
+                            </div>
+                        </li>
+                    }
                 }
-                else
-                {
-                    <p4 class="hello">
-                        Hello, @Context.Session.GetString("FirstName")!
-                    </p4>
-                }
-            }*@
+
+
+            </ul>*@
+
+
+
+                    <form class="form-inline my-2 my-lg-0">
+                        @if (@Context.Session.GetString("cart") != null)
+                        {
+
+                            @if (Context.Session.GetString("sum") != null)
+                            {
+                                <span class="mine bi">
+                                    @Context.Session.GetString("sum")
+                                </span>
+                            }
+
+                            <a asp-action="Cart" asp-controller="Products">
+
+                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-cart" fill="currentColor"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                                </svg>
+                            </a>}
+
+                        &nbsp; &nbsp;
+                        @if (@Context.Session.GetString("FirstName") == null)
+                        {
+                            <a asp-action="LogIn" asp-controller="Clients">
+                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-person-circle"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
+                                    <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                    <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
+                                </svg>
+                            </a>
+                        }
+                        &nbsp; &nbsp;
+                        @if (@Context.Session.GetString("FirstName") != null)
+                        {
+                            <a asp-action="logout" asp-controller="Clients">
+
+                                <i class="bi bi-person-x-fill"></i>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor" class="bi bi-person-x-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                                &nbsp; &nbsp;
+                            </a>
+                            <a asp-action="Edit" asp-controller="Clients" asp-route-id="@Context.Session.GetString("clientId")">
+                                <i class="bi bi-file-earmark-person"></i>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
+                                    <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5v2z" />
+                                </svg>
+                                &nbsp; &nbsp;
+                            </a>
+
+                        }
+
+
+                    </form>
+                    <form asp-action="Search" asp-controller="Products">
+                        <input placeholder="Enter product name" name="Name" autocomplete="off" />
+                        <input placeholder="Enter maximum price" name="Pricee" autocomplete="off" />
+                        <input type="submit" value="Search" />
+                    </form>
+                </div>
+</div>
+</nav>
+        
 
         @{
             string b = "";
@@ -247,7 +248,7 @@
                     <h5>store@gmail.com</h5>
                 </div>
                 <div class="col l4 offset-l2 s12">
-                    <p &nbsp; &nbsp</p>
+                    &nbsp; &nbsp;
                     <ul>
                         <li><a class="grey-text text-lighten-3" asp-action="about" asp-controller="Home">About</a></li>
                         <li><a class="grey-text text-lighten-3" asp-action="contcs" asp-controller="Home">Contact</a></li>

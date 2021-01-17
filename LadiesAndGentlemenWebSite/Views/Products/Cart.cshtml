@@ -10,20 +10,21 @@
 
     <table class="table table-bordered">
 
+
+        <thead>
+            <tr>
+                <th scope="col">
+                    for removal
+                </th>
+                <th scope="col">Image</th>
+                <th scope="col">Itam</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Subtotal</th>
+            </tr>
+        </thead>
         @foreach (var item in Model)
         {
-            <thead>
-                <tr>
-                    <th scope="col">
-                        for removal
-                    </th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Itam</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Subtotal</th>
-                </tr>
-            </thead>
             <tbody>
 
                 <tr>
@@ -52,6 +53,7 @@
 
             </tbody>
         }
+
     </table>
 
 
@@ -76,10 +78,10 @@
     <br />
     @if (Context.Session.GetString("sum") != "0")
     {
-    <a asp-controller="Orders" asp-action="Create" class="btn btn-secondary">Make Order</a>
+        <a asp-controller="Orders" asp-action="Create" class="btn btn-secondary">Make Order</a>
     }
-
-
+    <br />
+    <a asp-action="Index">back to products list</a>
 
 
 

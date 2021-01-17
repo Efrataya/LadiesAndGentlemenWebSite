@@ -4,93 +4,79 @@
     ViewData["Title"] = "My Order";
 }
 
-
-
+<img src="~/photo/logo.png" class="logo">
+<br /><br /><br /><br />   
 <div>
-    <h5>Order No. @Html.DisplayFor(model => model.Id) </h5>
+    <h3>Order No. @Html.DisplayFor(model => model.Id) </h3>
     <hr />
-    <h5>Contact details  </h5>
-    <dl class="row">
-        <dt class="col-sm-2">
-            name:
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.FirstName)  @Html.DisplayFor(model => model.Client.LastName)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-2">
-            mobile:
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.PhoneNumber)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-2">
-            Email address:
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.Email)
-        </dd>
-    </dl>
-    <h5>
-        The order will arrive at
-    </h5>
-    <dl class="row">
-        <dt class="col-sm-2">
-            street:
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.Address.Street)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-2">
-            house number:
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.Address.HouseNumber)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-2">
-            zip code:
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.Address.Zip)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-2">
-            city:
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.Address.City)
-        </dd>
-    </dl>
-    <h5>
+    <h3>Contact details  </h3>
+    <table class="table">
+
+        <tbody>
+            <tr>
+                <th scope="row">client name:  @Html.DisplayFor(model => model.Client.FirstName)  @Html.DisplayFor(model => model.Client.LastName)</th>
+
+
+            </tr>
+            <tr>
+                <th scope="row">mobile: @Html.DisplayFor(model => model.Client.PhoneNumber)</th>
+
+
+            </tr>
+            <tr>
+                <th scope="row"> Email address:  @Html.DisplayFor(model => model.Client.Email)</th>
+
+
+            </tr>
+        </tbody>
+    </table>
+
+
+    <h3>Contact details  </h3>
+    <table class="table">
+
+        <tbody>
+            <tr>
+                <th scope="row"> street:  @Html.DisplayFor(model => model.Client.Address.Street)</th>
+
+
+            </tr>
+            <tr>
+                <th scope="row">house number:  @Html.DisplayFor(model => model.Client.Address.HouseNumber)</th>
+
+
+            </tr>
+            <tr>
+                <th scope="row"> zip code:  @Html.DisplayFor(model => model.Client.Address.Zip)</th>
+
+
+            </tr>
+            <tr>
+                <th scope="row">city: @Html.DisplayFor(model => model.Client.Address.City)</th>
+
+
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>
         The items you ordered:
-    </h5>
+    </h3>
     @foreach (var item in Model.Carts)
     {
         <img src="@item.Product.Image" height="100" />
 
-        @*<div class="card" style="width: 18em;">
-                <img src="@item.Product.Image" class="card-img-top" >
-                <div class="card-body">
-                    <p class="card-text">@item.Product.Description</p>
-                    <p class="card-text">@item.Product.price</p>
-                </div>
-            </div>*@
+
     }
+    <br />
+    <br />
     <h5>
+
         Total:@Context.Session.GetString("price")$
     </h5>
 </div>
+<p> Shipping will arrive for up to two weeks from today</p>
 
 
-<div>
-    <a asp-action="sending" asp-controller="Home">for information about our shipping policy</a> |
-  
-</div>
+<a asp-action="sending" asp-controller="Home">for information about our shipping policy</a>
+

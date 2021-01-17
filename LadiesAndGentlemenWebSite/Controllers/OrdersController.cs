@@ -23,29 +23,13 @@ namespace LadiesAndGentlemenWebSite.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            {
-                if (HttpContext.Session.GetString("cart") == null)
-                {
+           
+               
                     return View(await _context.Product.ToListAsync());
-                }
-                else
-                {
-                    string productId = HttpContext.Session.GetString("cart");
-                    string[] ids = productId.Split(',');
-                    int[] myInts = ids.Select(int.Parse).ToArray();
-                    var purchased = from p in _context.Product
-                                    where myInts.Any(s => s == p.Id)
-                                    select p;
-                    var leftItems = _context.Product.Except(purchased);
-                    return View(await leftItems.ToListAsync());
-                }
-
-            }
+         
+           
         }
-        //public async Task<IActionResult> MyOrder()
-        //{
-        //    return View();
-        //}
+        
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -80,40 +64,21 @@ namespace LadiesAndGentlemenWebSite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Sum")] Order order)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    _context.Add(order);
-            //    await _context.SaveChangesAsync();
-
-            //    string cart = HttpContext.Session.GetString("Cart");
-            //    string[] productIds = cart.Split(",", StringSplitOptions.RemoveEmptyEntries);
-
-            //    foreach (var id in productIds)
-            //    {
-            //        ProductsOrder po = new ProductsOrder();
-            //        po.ProductId = int.Parse(id);
-            //        po.OrderId = order.Id;
-            //        _context.Add(po);
-            //        await _context.SaveChangesAsync();
-            //    }
-
-            //    HttpContext.Session.SetString("Cart", "");
-
-            //    return RedirectToAction(nameof(Index));
-            //}
-            //return View(order);
-            if (ModelState.IsValid)
+            if (HttpContext.Session.GetString("FirstName") == null)
+                return RedirectToAction("Login", "Clients");
+    
+             if (ModelState.IsValid)
             {
                 Order myOrder = new Order();
                 _context.Add(order);
                 await _context.SaveChangesAsync();
                 string productId = HttpContext.Session.GetString("cart");
-                string[] ids = productId.Split(',');
-                int[] myInts = ids.Select(int.Parse).ToArray();
-                foreach (var id in myInts)
+                string[] ids = productId.Split(',', StringSplitOptions.RemoveEmptyEntries);
+               
+                foreach (var id in ids)
                 {
                     Cart c = new Cart();
-                    c.ProductId = id;
+                    c.ProductId = Int32.Parse(id);
                     c.OrderId = order.Id;
                     _context.Add(c);
                     await _context.SaveChangesAsync();

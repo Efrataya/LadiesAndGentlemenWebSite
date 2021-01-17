@@ -1,0 +1,3 @@
+﻿SET IDENTITY_INSERT [dbo].[Order] ON
+
+SET IDENTITY_INSERT [dbo].[Order] OFF

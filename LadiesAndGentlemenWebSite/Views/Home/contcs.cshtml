@@ -1,8 +1,7 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "contcs";
 }
-@*<img src="photo/logo.PNG" class="logo">*@
+
 <h2 class="tit">Contact us</h2>
 <nav class="data">
 
@@ -23,52 +22,88 @@
     <br>
     fridays and holiday eves between the hours 08:00-13:00.
     <br>
-    Our customer service team is also available in direct chat on the website, by phone 03-5568111 or in the following
-    form:
+    Our customer service team is also available in direct chat on the website, by phone 03-5568111.
 
     <br>
-
-
-
-
-    <h2>
-        contact information
-    </h2>
-
-    <label>name</label>
     <br>
+    <h3> We would love to hear your opinion :)</h3>
+    <br>
+    <table cellSpacing="0" cellPadding="0" width="200" border="1">
+        <tr>
 
-    <input title="name" value="" type="text">
+            <h5> <td align="center">What does the site look like to you?</td></h5>
+        </tr>
+        <tr>
+
+            <td align="left" class="ask">
+                <u> <input onclick="alert(value)" type="radio" value="Sorry, we'll try to improve it!" name="myradio">Bad<br></u>
+                <u> <input onclick="alert(value)" type="radio" value="Hope you enjoy the next improvement more!" name="myradio">Good<br></u>
+                <u><input onclick="alert(value)" type="radio" value="We're glad to hear!" name="myradio">Excellent<br></u>
+            </td>
+
+        </tr>
+    </table>
+    <div class="num">
+        You are entering the site
+        <script language="JavaScript">
+<!--
+            var caution = false
+            function setCookie(name, value, expires, path, domain, secure) {
+                var curCookie = name + "=" + escape(value) +
+                    ((expires) ? "; expires=" + expires.toGMTString() : "") +
+                    ((path) ? "; path=" + path : "") +
+                    ((domain) ? "; domain=" + domain : "") +
+                    ((secure) ? "; secure" : "")
+                if (!caution || (name + "=" + escape(value)).length <= 4000)
+                    document.cookie = curCookie
+                else
+                    if (confirm("Cookie exceeds 4KB and will be cut!"))
+                        document.cookie = curCookie
+            }
+            function getCookie(name) {
+                var prefix = name + "="
+                var cookieStartIndex = document.cookie.indexOf(prefix)
+                if (cookieStartIndex == -1)
+                    return null
+                var cookieEndIndex = document.cookie.indexOf(";", cookieStartIndex +
+                    prefix.length)
+                if (cookieEndIndex == -1)
+                    cookieEndIndex = document.cookie.length
+                return unescape(document.cookie.substring(cookieStartIndex +
+                    prefix.length, cookieEndIndex))
+            }
+            function deleteCookie(name, path, domain) {
+                if (getCookie(name)) {
+                    document.cookie = name + "=" +
+                        ((path) ? "; path=" + path : "") +
+                        ((domain) ? "; domain=" + domain : "") +
+                        "; expires=Thu, 01-Jan-70 00:00:01 GMT"
+                }
+            }
+            function fixDate(date) {
+                var base = new Date(0)
+                var skew = base.getTime()
+                if (skew > 0)
+                    date.setTime(date.getTime() - skew)
+            }
+            var now = new Date()
+            fixDate(now)
+            now.setTime(now.getTime() + 365 * 24 * 60 * 60 * 1000)
+            var visits = getCookie("counter")
+            if (!visits)
+                visits = 1
+            else
+                visits = parseInt(visits) + 1
+            setCookie("counter", visits, now)
+            document.write(visits)
+                                                                                                    // --></script> times
+    </div>
+    <div id="ex003" class="fblike-002">
+        <div class="fblike002"><img src="http://www.sagive.co.il/wp-content/uploads/2014/03/facebook-like-002.png" alt="פייסבוק לייק" class="fblikeimg" /></div>
+
     </div>
 
-    <div></div>
-    <label>E-mail</label>
-    <div></div>
-    <input name="email" title="E-mail" value="" type="text">
 
-
-    <div></div>
-
-    <label>phone</label>
-    <div></div>
-    <input name="telephone" title="phone" value="" type="text">
-
-    <div></div>
-
-    <label>message</label>
-    <div></div>
-    <textarea name="comment" title="message" cols="50" rows="3"></textarea>
-
-
-
-
-
-
-    <button type="submit" title="Send"><span><span>Send</span></span></button>
-
-</nav>
-
-@section Css{
-    <link rel="stylesheet" href="~/css/contcs.css" />
-}
-
+    @section Css{
+        <link rel="stylesheet" href="~/css/contcs.css" />
+    }
