@@ -13,10 +13,10 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 @foreach (var subCategory in group.ToList())
                 {
-                    <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="1" asp-route-id2="1">@Html.DisplayFor(modelItem => subCategory.Name)</a>
+                    <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="@subCategory.SubCategoryId" asp-route-id2="@subCategory.Id">@Html.DisplayFor(modelItem => subCategory.Name)</a>
                 }
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="1">All</a>
+                <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="@group.Key">All</a>
             </div>
         </li>
     }

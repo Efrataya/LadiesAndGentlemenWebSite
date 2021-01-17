@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<LadiesAndGentlemenWebSite.Models.Product>
-
+@using Microsoft.AspNetCore.Http;
 @{
     ViewData["Title"] = "Index";
 }
@@ -10,6 +10,15 @@
     <style>
         * {
             box-sizing: border-box;
+        }
+
+        div {
+            margin-top: 2px;
+        }
+
+        .card {
+            margin-top: 60px;
+            margin-bottom: 20px;
         }
 
         .img-magnifier-container {
@@ -94,67 +103,58 @@
 
 
 <div class="container">
-
     <div class="row">
         @foreach (var item in Model)
         {
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="card" style="width: 14rem;">
-                    <img src="@Html.DisplayFor(modelItem => item.Image)" class="card-img-top">
+        <div class="col-lg-3 col-md-4 col-sm-6">
 
-                    <div class="card-body">
-                        <h8 class="card-text">@Html.DisplayFor(modelItem => item.Description)</h8>
+            <div class="card" style="width: 14rem; ">
+                <img src="@Html.DisplayFor(modelItem => item.Image)" class="card-img-top">
 
-                        <p class="card-text">@Html.DisplayFor(modelItem => item.price)$</p>
-                        <!-- Button trigger modal -->
+                <div class="card-body">
+                    <h8 class="card-text">@Html.DisplayFor(modelItem => item.Description)</h8>
+
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.price)$</p>
+                    <!-- Button trigger modal -->
+                    <a asp-action="Details" asp-route-id="@item.Id">
                         <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             for purchase
                         </button>
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-body">
+                    </a>
+                    @if (Context.Session.GetString("FirstName") != null)
+                            {
+                    @if (Context.Session.GetString("FirstName") == "L&G1234")
+                                {
+                    <a asp-action="Edit" asp-route-id="@item.Id" asp-controller="Products">
 
-                                        <div class="stamped-added only-tablet-desktop">
+                        <button type="submit" class="btn btn-dark">Edit</button>
 
-                                            <h1>@Html.DisplayFor(modelItem => item.Description)</h1>
-                                        </div>
-                                        <div class="img-magnifier-container">
-                                            <img id="myimage" src="@Html.DisplayFor(modelItem => item.Image)" width="300" height="400">
-                                        </div>
-                                        <div class="price-box">
-                                            <span class="regular-price" id="product-price-86474">
-                                                <span class="price">@Html.DisplayFor(modelItem => item.price)$</span>
-                                            </span>
-                                        </div>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" asp-controller="Products">
 
-                                    </div>
-                                    <form asp-controller="Products" asp-action="Cart">
-                                        <input type="hidden" value="@Html.DisplayFor(modelItem => item.Id)" name="Id" id="Id" />
+                        <button type="submit" class="btn btn-dark">Delete</button>
 
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-dark">add to my cart</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                    </a>
+
+                                }
+                            }
 
 
-                    </div>
+
                 </div>
-
             </div>
+
+        </div>
 
         }
     </div>
+
 </div>
+
 <script>
     /* Execute the magnify function: */
     magnify("myimage", 3);
-    /* Specify the id of the image, and the strength of the magnifier glass: */
+            /* Specify the id of the image, and the strength of the magnifier glass: */
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 

@@ -28,12 +28,12 @@ namespace LadiesAndGentlemenWebSite.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Category
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (category == null)
-            {
-                return NotFound();
-            }
+            //var category = _context.Category.ToList();
+            //   // .FirstOrDefault(m => m.Id == id);
+            //if (category == null)
+            //{
+            //    return NotFound();
+            //}
 
             var p = from product in _context.Product
                     where product.Category.SubCategory.Id == id
