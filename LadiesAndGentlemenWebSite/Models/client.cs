@@ -27,7 +27,7 @@ namespace LadiesAndGentlemenWebSite.Models
         public string Password { get; set; }
 
         public Address Address { get; set; }
-
+       
         [Required(ErrorMessage = "You must enter a phone number")]        
         [RegularExpression(@"^05[0,2, 3, 4,5, 8]{1}[-]{0,1}[\s\./0-9]{7}$")]
         [DataType(DataType.PhoneNumber)]

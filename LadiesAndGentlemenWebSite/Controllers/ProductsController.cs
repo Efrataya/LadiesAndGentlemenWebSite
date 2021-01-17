@@ -88,13 +88,15 @@ namespace LadiesAndGentlemenWebSite.Controllers
         // GET: cart
         public async Task<IActionResult> Cart(int Id)
         {
-
+          
             if (HttpContext.Session.GetString("cart") == null)
             {
                 HttpContext.Session.SetString("sum", "1");
                 string myString = Id.ToString();
                 HttpContext.Session.SetString("cart", myString);
-
+                Dictionary<int, int> dict = new Dictionary<int, int>();
+                dict.Add(Id, 1);
+                ViewData["quantity"] = dict;
                 var purchased = from p in _context.Product
                                 where Id == p.Id
                                 select p;
@@ -104,17 +106,14 @@ namespace LadiesAndGentlemenWebSite.Controllers
             }
             else
             {
+               
                 string productId = HttpContext.Session.GetString("cart");
                 productId += ",";
                 productId += Id;
                 HttpContext.Session.SetString("cart", productId);
                 string[] ids = productId.Split(',');
                 int[] myInts = ids.Select(int.Parse).ToArray();
-                string sum = HttpContext.Session.GetString("sum");
-                int x = Int32.Parse(sum);
-                x= myInts.Count();
-                string updateSum = x.ToString();
-                HttpContext.Session.SetString("sum", updateSum);
+               
                 var c = from p in _context.Product
                         where myInts.Contains(p.Id)
                         select p;
@@ -124,6 +123,22 @@ namespace LadiesAndGentlemenWebSite.Controllers
                     finalPrice += Product.price;
                 string price = finalPrice.ToString();
                 HttpContext.Session.SetString("price", price);
+                Dictionary<int, int> dict = new Dictionary<int, int>();
+                foreach (var id in myInts)
+                {
+                    if (dict.ContainsKey(id))
+                        dict[id]++;
+                    else
+                        dict.Add(id, 1);
+                }
+                ViewData["quantity"] = dict;
+                if(Id==0)
+                    return View(await c.ToListAsync());
+                string sum = HttpContext.Session.GetString("sum");
+                int x = Int32.Parse(sum);
+                x = myInts.Count();
+                string updateSum = x.ToString();
+                HttpContext.Session.SetString("sum", updateSum);
                 return View(await c.ToListAsync());
             }
 
@@ -226,12 +241,15 @@ namespace LadiesAndGentlemenWebSite.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Image,Description,price")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Image,Description,price")] Product product, int category)
         {
             if (HttpContext.Session.GetString("FirstName") != "L&G1234")
                 return RedirectToAction("Login", "Clients");
             if (ModelState.IsValid)
             {
+                Category c= new Category();
+                c.Id = category;
+                product.Category = c;
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -241,7 +259,7 @@ namespace LadiesAndGentlemenWebSite.Controllers
 
 
         // GET: Products/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id ,int id2)
         {
             if (HttpContext.Session.GetString("FirstName") != "L&G1234")
                 return RedirectToAction("Login", "Clients");
@@ -255,6 +273,7 @@ namespace LadiesAndGentlemenWebSite.Controllers
             {
                 return NotFound();
             }
+            await _context.SaveChangesAsync();
             return View(product);
         }
 

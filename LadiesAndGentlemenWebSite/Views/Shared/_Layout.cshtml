@@ -46,11 +46,11 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" asp-controller="Products" asp-action="Details1" asp-route-id="1" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle" asp-controller="Products" asp-action="Details1" asp-route-id="1" id="navbarDropdown2" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Men
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
                             <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="2" asp-route-id2="5">Suits</a>
                             <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="2" asp-route-id2="6">Shirts</a>
                             <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="2" asp-route-id2="7">Shoes</a>
@@ -60,11 +60,11 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" asp-controller="Products" asp-action="Details1" asp-route-id="3" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle" asp-controller="Products" asp-action="Details1" asp-route-id="3" id="navbarDropdown3" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Children
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
 
                             <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="3" asp-route-id2="10">Suits</a>
                             <div class="dropdown-divider"></div>
@@ -103,7 +103,7 @@
 
 
                 </ul>
-
+              
 
 
                 <form class="form-inline my-2 my-lg-0">
@@ -142,14 +142,14 @@
                     @if (@Context.Session.GetString("FirstName") != null)
                     {
                         <a asp-action="logout" asp-controller="Clients">
-                            &nbsp; &nbsp;
+                          
                             <i class="bi bi-person-x-fill"></i>
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor" class="bi bi-person-x-fill" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z" />
                             </svg>
                             &nbsp; &nbsp;
                         </a>
-                        <a asp-action="Edit"  asp-controller="Clients" asp-route-id="@Context.Session.GetString("clientId")">
+                        <a asp-action="Edit" asp-controller="Clients" asp-route-id="@Context.Session.GetString("clientId")">
                             <i class="bi bi-file-earmark-person"></i>
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
                                 <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
@@ -188,13 +188,16 @@
 
         @{
             string b = "";
-            if (DateTime.Now.Hour < 12)
+            if (DateTime.Now.Hour < 4)
+                b = "night";
+            else if (DateTime.Now.Hour < 12)
                 b = "morning";
-            else
+            else if(DateTime.Now.Hour < 18)
             {
                 b = "afternon";
             }
-
+            else
+                b = "evening";
         }
 
 
@@ -203,20 +206,16 @@
             @if (@Context.Session.GetString("FirstName") == "L&G1234")
             {
                 <p4 class="hello">
-                    Hello, manager! good @b
+                 good @b manager! 
                 </p4>
             }
             else
             {
                 <p4 class="hello">
-                    Hello, @Context.Session.GetString("FirstName")! good @b
+                   good @b @Context.Session.GetString("FirstName")!
                 </p4>
 
-                <a asp-action="logout" asp-controller="Clients">
-
-                    <i class="fa fa-sign-out" aria-hidden="true"></i>
-
-                </a>
+                
 
             }
         }
@@ -292,8 +291,7 @@
             integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
             crossorigin="anonymous"></script>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

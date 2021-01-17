@@ -1,33 +1,96 @@
 ﻿@model LadiesAndGentlemenWebSite.Models.Order
-
+@using Microsoft.AspNetCore.Http;
 @{
     ViewData["Title"] = "My Order";
 }
 
-<h2>Order Details</h2>
+
 
 <div>
-    <h4>Order No. @Html.DisplayNameFor(model => model.Id) </h4>
+    <h5>Order No. @Html.DisplayFor(model => model.Id) </h5>
     <hr />
-    @foreach (var item in Model.Carts)
-    {
-        <div>@item.Product.Description @item.Product.Image </div>
-    }
+    <h5>Contact details  </h5>
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Sum)
+            name:
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Sum)
+            @Html.DisplayFor(model => model.Client.FirstName)  @Html.DisplayFor(model => model.Client.LastName)
         </dd>
     </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            mobile:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Client.PhoneNumber)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            Email address:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Client.Email)
+        </dd>
+    </dl>
+    <h5>
+        The order will arrive at
+    </h5>
+    <dl class="row">
+        <dt class="col-sm-2">
+            street:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Client.Address.Street)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            house number:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Client.Address.HouseNumber)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            zip code:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Client.Address.Zip)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            city:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Client.Address.City)
+        </dd>
+    </dl>
+    <h5>
+        The items you ordered:
+    </h5>
+    @foreach (var item in Model.Carts)
+    {
+        <img src="@item.Product.Image" height="100" />
+
+        @*<div class="card" style="width: 18em;">
+                <img src="@item.Product.Image" class="card-img-top" >
+                <div class="card-body">
+                    <p class="card-text">@item.Product.Description</p>
+                    <p class="card-text">@item.Product.price</p>
+                </div>
+            </div>*@
+    }
+    <h5>
+        Total:@Context.Session.GetString("price")$
+    </h5>
 </div>
-@foreach (var item in Model.Carts)
-{
-    <div>@item.Product.Description @item.Product.price </div>
-}
+
 
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="sending" asp-controller="Home">for information about our shipping policy</a> |
+  
 </div>

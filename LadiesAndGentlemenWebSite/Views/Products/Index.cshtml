@@ -103,7 +103,6 @@
 
 
 <div class="container">
-
     <div class="row">
         @foreach (var item in Model)
         {
@@ -117,19 +116,27 @@
 
                         <p class="card-text">@Html.DisplayFor(modelItem => item.price)$</p>
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button type="button" class=" open-dialog btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="@item.Id">
                             for purchase
                         </button>
+
+                        <script type="text/javascript">
+                            $(document).on("click", ".open-dialog", function () {
+                                $('#details').val($(this).data('Description')); 
+                                $('#exampleModal').modal('show');
+                            });
+                        </script>
+
                         @if (Context.Session.GetString("FirstName") != null)
                         {
                             @if (Context.Session.GetString("FirstName") == "L&G1234")
                             {
-                                <a asp-action="Edit" asp-route-id="(@Html.DisplayFor(modelItem => item.Id)" asp-controller="Products">
+                                <a asp-action="Edit" asp-route-id="@item.Id" asp-controller="Products">
 
                                     <button type="submit" class="btn btn-dark">Edit</button>
 
                                 </a>
-                                <a asp-action="Delete" asp-route-id="(@Html.DisplayFor(modelItem => item.Id)" asp-controller="Products">
+                                <a asp-action="Delete" asp-route-id="@item.Id" asp-controller="Products">
 
                                     <button type="submit" class="btn btn-dark">Delete</button>
 
@@ -137,37 +144,7 @@
 
                             }
                         }
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-body">
 
-                                        <div class="stamped-added only-tablet-desktop">
-
-                                            <h1>@Html.DisplayFor(modelItem => item.Description)</h1>
-                                        </div>
-                                        <div class="img-magnifier-container">
-                                            <img id="myimage" src="@Html.DisplayFor(modelItem => item.Image)" width="300" height="400">
-                                        </div>
-                                        <div class="price-box">
-                                            <span class="regular-price" id="product-price-86474">
-                                                <span class="price">@Html.DisplayFor(modelItem => item.price)$</span>
-                                            </span>
-                                        </div>
-
-                                    </div>
-                                    <form asp-controller="Products" asp-action="Cart">
-                                        <input type="hidden" value="@Html.DisplayFor(modelItem => item.Id)" name="Id" id="Id" />
-
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-dark">add to my cart</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
 
 
                     </div>
@@ -176,6 +153,36 @@
             </div>
 
         }
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+
+                        <div class="stamped-added only-tablet-desktop">
+
+                            <h1 id="details"></h1>
+                        </div>
+                        <div class="img-magnifier-container">
+                            <img id="myimage" src="#" width="300" height="400">
+                        </div>
+                        <div class="price-box">
+                            <span class="regular-price" id="product-price-86474">
+                                <span class="price"></span>
+                            </span>
+                        </div>
+
+                    </div>
+                    <form asp-controller="Products" asp-action="Cart">
+                        <input type="hidden" @*value="@Html.DisplayFor(modelItem => item.Id)"*@ name="Id" id="Id" />
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-dark">add to my cart</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
@@ -184,23 +191,23 @@
     /* Execute the magnify function: */
     magnify("myimage", 3);
             /* Specify the id of the image, and the strength of the magnifier glass: */
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+                        </script>
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
 
 
-@*<img src="photo\per.jpg" width="250px" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Pink fur shoe</h5>
-                <p class="card-text">120$</p>
-                <a href="#" class="btn btn-primary">For purchase</a>
+                        @*<img src="photo\per.jpg" width="250px" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Pink fur shoe</h5>
+                    <p class="card-text">120$</p>
+                    <a href="#" class="btn btn-primary">For purchase</a>
+                </div>
             </div>
-        </div>
-    </div>*@
+        </div>*@
 
 
 
 
-@section Css{
-    <link rel="stylesheet" herf="~/css/product" />
-}
+                        @section Css{
+                            <link rel="stylesheet" herf="~/css/product" />
+                        }

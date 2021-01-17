@@ -23,7 +23,24 @@ namespace LadiesAndGentlemenWebSite.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Order.ToListAsync());
+            {
+                if (HttpContext.Session.GetString("cart") == null)
+                {
+                    return View(await _context.Product.ToListAsync());
+                }
+                else
+                {
+                    string productId = HttpContext.Session.GetString("cart");
+                    string[] ids = productId.Split(',');
+                    int[] myInts = ids.Select(int.Parse).ToArray();
+                    var purchased = from p in _context.Product
+                                    where myInts.Any(s => s == p.Id)
+                                    select p;
+                    var leftItems = _context.Product.Except(purchased);
+                    return View(await leftItems.ToListAsync());
+                }
+
+            }
         }
         //public async Task<IActionResult> MyOrder()
         //{
@@ -38,12 +55,15 @@ namespace LadiesAndGentlemenWebSite.Controllers
             }
 
             var order = await _context.Order.Include(x => x.Carts).ThenInclude(x => x.Product)
+               
                 .FirstOrDefaultAsync(m => m.Id == id);
+            order = await _context.Order.Include(x => x.Client).ThenInclude(x=>x.Address).FirstOrDefaultAsync(m => m.Id == id);
+            
             if (order == null)
             {
                 return NotFound();
             }
-
+            
             return View(order);
         }
 
@@ -99,7 +119,16 @@ namespace LadiesAndGentlemenWebSite.Controllers
                     await _context.SaveChangesAsync();
                 }
                 HttpContext.Session.SetString("Cart", "");
-                return RedirectToAction(nameof(Index));
+                string clientId=HttpContext.Session.GetString("clientId");
+                int cId = Int32.Parse(clientId);
+                var myClient = from clients in _context.Client
+                               where cId == clients.Id
+                               select clients;
+                order.Client = myClient.First();
+                float total = Int32.Parse(@HttpContext.Session.GetString("price"));
+                order.Sum = total;
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Details", new { id = order.Id });
             }
             return View(order);
         }

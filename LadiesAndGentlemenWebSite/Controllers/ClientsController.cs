@@ -97,11 +97,21 @@ namespace LadiesAndGentlemenWebSite.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Password,PhoneNumber,Email,DateOfBirth")] Client client)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Password,PhoneNumber,Email,DateOfBirth")] Client client, string street, string city, int houseNumber, int zip)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(client);
+                await _context.SaveChangesAsync();
+                Address address = new Address();
+                address.Street = street;
+                address.City = city;
+                address.HouseNumber = houseNumber;
+                address.Zip = zip;
+                _context.Add(address);
+                await _context.SaveChangesAsync();
+                client.Address = address;
+                
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
             }

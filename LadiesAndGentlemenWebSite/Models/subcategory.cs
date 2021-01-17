@@ -15,5 +15,6 @@ namespace LadiesAndGentlemenWebSite.Models
         [Display(Name = "SubCategory")]
         public string Name { get; set; }
         public ICollection<Category> Categories { get; set; }
+
     }
 }

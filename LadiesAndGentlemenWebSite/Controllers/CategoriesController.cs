@@ -14,7 +14,7 @@ namespace LadiesAndGentlemenWebSite.Controllers
     public class CategoriesController : Controller
     {
         private readonly LadiesAndGentlemenWebSiteContext _context;
-
+        
         public CategoriesController(LadiesAndGentlemenWebSiteContext context)
         {
             _context = context;
